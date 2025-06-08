@@ -1,0 +1,34 @@
+name: Tiiny Markdown Publisher
+description: Converte Markdown in HTML/ZIP con Pico.css e pubblica su Tiiny.host
+inputs:
+  input_path:
+    description: "File .md o cartella contenente .md"
+    required: true
+  output_name:
+    description: "Nome file HTML o archivio ZIP di output"
+    required: false
+  tiiny_api_key:
+    description: "API key di Tiiny.host"
+    required: true
+  tiiny_prefix:
+    description: "Prefisso per generare dominio (opzionale)"
+    required: false
+runs:
+  using: "composite"
+  steps:
+    - uses: actions/setup-python@v5
+      with:
+        python-version: "3.11"
+
+    - name: Install dependencies
+      run: pip install markdown requests
+
+    - name: Run conversion and upload
+      shell: bash
+      run: |
+        python ${{ github.action_path }}/main.py \
+          "${{ inputs.input_path }}" \
+          --output "${{ inputs.output_name || '' }}" \
+          --domain-prefix "${{ inputs.tiiny_prefix || '' }}"
+      env:
+        TIINY_API_KEY: ${{ inputs.tiiny_api_key }}
