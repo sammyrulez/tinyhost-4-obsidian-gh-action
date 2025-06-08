@@ -1,5 +1,7 @@
 # 🌐 Tiiny Markdown Publisher
 
+image badge: ![GitHub Workflow Status](https://img.shields.io/github/actions/workflow/status/sammyrulez/tiiny-markdown-action/test-action.yml?branch=main&label=publish&style=flat-square)
+
 A reusable GitHub Action that:
 
 ✅ Converts Markdown files (`.md`) to styled HTML using [Pico.css](https://picocss.com)  
